@@ -143,10 +143,10 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll indicator - moved higher to avoid artwork overlap */}
+      {/* Scroll indicator */}
       <div 
         className={cn(
-          "absolute bottom-[38vh] left-1/2 -translate-x-1/2 text-muted-foreground animate-float transition-opacity duration-500",
+          "absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground animate-float transition-opacity duration-500",
           showContent ? "opacity-100" : "opacity-0"
         )}
         style={{ transitionDelay: '800ms' }}
