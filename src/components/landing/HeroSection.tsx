@@ -21,21 +21,21 @@ export const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!artworkRef.current) return;
-      const rect = artworkRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      // Calculate offset from center, normalized to -1 to 1
-      const x = (e.clientX - centerX) / (rect.width / 2);
-      const y = (e.clientY - centerY) / (rect.height / 2);
-      setMousePos({ x: x * 30, y: y * 20 }); // Max 30px horizontal, 20px vertical offset
-    };
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!artworkRef.current) return;
+    const rect = artworkRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    // Calculate offset from center, normalized to -1 to 1
+    const x = (e.clientX - centerX) / (rect.width / 2);
+    const y = (e.clientY - centerY) / (rect.height / 2);
+    setMousePos({ x: x * 30, y: y * 20 }); // Max 30px horizontal, 20px vertical offset
+  };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setMousePos({ x: 0, y: 0 }); // Reset shadow position
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -198,7 +198,8 @@ export const HeroSection = () => {
           ref={artworkRef} 
           className="relative z-20 container mx-auto px-4 pt-16"
           onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
         >
           <div className="relative max-w-5xl mx-auto">
             {/* The artwork with reactive shadow, movement and hover zoom */}
