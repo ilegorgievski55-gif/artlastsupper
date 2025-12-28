@@ -3,14 +3,37 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Hammer, Trees, Church, Award } from 'lucide-react';
 
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
 export const HeroSection = () => {
   const [showContent, setShowContent] = useState(false);
+  const [mousePos, setMousePos] = useState<MousePosition>({ x: 0, y: 0 });
   const videoRef = useRef<HTMLVideoElement>(null);
+  const artworkRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Show content after 3 seconds of video playing
     const timer = setTimeout(() => setShowContent(true), 3000);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!artworkRef.current) return;
+      const rect = artworkRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      // Calculate offset from center, normalized to -1 to 1
+      const x = (e.clientX - centerX) / (rect.width / 2);
+      const y = (e.clientY - centerY) / (rect.height / 2);
+      setMousePos({ x: x * 30, y: y * 20 }); // Max 30px horizontal, 20px vertical offset
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -163,18 +186,15 @@ export const HeroSection = () => {
         <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background to-wood-medium z-10 pointer-events-none" />
         
         {/* Artwork container */}
-        <div className="relative z-20 container mx-auto px-4 pt-16">
+        <div ref={artworkRef} className="relative z-20 container mx-auto px-4 pt-16">
           <div className="relative max-w-5xl mx-auto">
-            {/* Ambient glow behind artwork */}
-            <div className="absolute inset-0 blur-3xl opacity-30 bg-gradient-radial from-primary/40 via-primary/10 to-transparent" />
-            
-            {/* The artwork */}
+            {/* The artwork with reactive shadow */}
             <img
               src="/images/artwork/last-supper-cutout.png"
               alt="The Last Supper - Hand-carved wooden relief by Stojmir Veselinov"
-              className="relative w-full h-auto drop-shadow-2xl"
+              className="relative w-full h-auto transition-[filter] duration-150 ease-out"
               style={{
-                filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.5)) drop-shadow(0 0 100px hsl(var(--primary) / 0.2))'
+                filter: `drop-shadow(${mousePos.x}px ${20 + mousePos.y}px 40px rgba(0,0,0,0.6))`
               }}
             />
             
