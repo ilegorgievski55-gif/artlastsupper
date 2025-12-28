@@ -5,7 +5,6 @@ import LastSupperSection from '@/components/landing/LastSupperSection';
 import ContactSection from '@/components/landing/ContactSection';
 import Footer from '@/components/landing/Footer';
 import StickyCtaBar from '@/components/landing/StickyCtaBar';
-import ExitIntentPopup from '@/components/landing/ExitIntentPopup';
 
 const Index = () => {
   return (
@@ -19,7 +18,6 @@ const Index = () => {
       
       {/* Advanced features */}
       <StickyCtaBar targetId="contact" />
-      <ExitIntentPopup />
     </main>
   );
 };

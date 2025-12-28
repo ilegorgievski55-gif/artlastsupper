@@ -1,39 +1,39 @@
 import ScrollReveal from './ScrollReveal';
 import Gallery from './Gallery';
-import { Eye, Hammer, Sparkles, Quote } from 'lucide-react';
+import { Eye, Hammer, Sparkles, Quote, Calendar } from 'lucide-react';
 
 export const LastSupperSection = () => {
-  // Main artwork gallery images
+  // Main artwork gallery images - using the real photos
   const galleryImages = [
     {
-      src: 'https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1200&q=80',
+      src: '/images/artwork/last-supper-full.jpg',
       alt: 'The Last Supper full view',
       caption: 'Full view of the complete relief showing all twelve apostles and Christ',
     },
     {
-      src: 'https://images.unsplash.com/photo-1577720580479-7d839d829c73?w=1200&q=80',
-      alt: 'Detail of Christ figure',
-      caption: 'Detail: The central figure of Christ, radiating divine presence',
+      src: '/images/artwork/last-supper-angle.jpg',
+      alt: 'The Last Supper angle view',
+      caption: 'Dramatic angle showing the incredible depth of the relief carving',
     },
     {
-      src: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=1200&q=80',
-      alt: 'Detail of apostles left side',
-      caption: 'Detail: Apostles on the left, each face individually carved with distinct emotion',
+      src: '/images/artwork/apostle-detail.jpg',
+      alt: 'Detail of apostle figure',
+      caption: 'Detail: An apostle figure with intricate robe patterns and expressive features',
     },
     {
-      src: 'https://images.unsplash.com/photo-1558021212-51b6ecfa0db9?w=1200&q=80',
-      alt: 'Detail of apostles right side',
-      caption: 'Detail: Apostles on the right, showing the depth of the relief carving',
+      src: '/images/artwork/scroll-detail.jpg',
+      alt: 'Scroll with text detail',
+      caption: 'Detail: The ornate scroll with hand-carved Cyrillic text',
     },
     {
-      src: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&q=80',
-      alt: 'Wood grain detail',
-      caption: 'The natural wood grain enhances the sacred atmosphere of the piece',
+      src: '/images/artwork/tablecloth-detail.jpg',
+      alt: 'Tablecloth and feet detail',
+      caption: 'Detail: The delicate tablecloth drapery and carved feet beneath',
     },
     {
-      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
-      alt: 'Artist with the sculpture',
-      caption: 'Stojmir Veselinov with his masterpiece in the family collection',
+      src: '/images/artwork/year-1998.jpg',
+      alt: 'Year 1998 carved into wood',
+      caption: 'The artist\'s signature date: 1998г (1998) carved into the wood',
     },
   ];
 
@@ -67,6 +67,11 @@ export const LastSupperSection = () => {
           <p className="font-display text-xl md:text-2xl text-muted-foreground italic">
             Pinnacle of Devotion
           </p>
+          {/* Year badge */}
+          <div className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-primary/20 border border-primary/40 rounded-sm">
+            <Calendar className="w-4 h-4 text-primary" />
+            <span className="font-display text-primary text-sm">Completed 1998</span>
+          </div>
         </ScrollReveal>
 
         {/* Description */}
