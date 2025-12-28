@@ -186,7 +186,7 @@ export const HeroSection = () => {
         {/* Wood texture background image */}
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: 'url(/images/artwork/wood-texture-bg.jpg)' }}
+          style={{ backgroundImage: 'url(/images/artwork/wood-texture-bg.jpg)', filter: 'saturate(0.8)' }}
         />
         {/* Dark base behind the texture */}
         <div className="absolute inset-0 bg-wood-medium -z-10" />
