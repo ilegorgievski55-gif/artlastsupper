@@ -188,12 +188,13 @@ export const HeroSection = () => {
         {/* Artwork container */}
         <div ref={artworkRef} className="relative z-20 container mx-auto px-4 pt-16">
           <div className="relative max-w-5xl mx-auto">
-            {/* The artwork with reactive shadow */}
+            {/* The artwork with reactive shadow and movement */}
             <img
               src="/images/artwork/last-supper-cutout.png"
               alt="The Last Supper - Hand-carved wooden relief by Stojmir Veselinov"
-              className="relative w-full h-auto transition-[filter] duration-150 ease-out"
+              className="relative w-full h-auto transition-all duration-150 ease-out"
               style={{
+                transform: `translate(${mousePos.x * 0.15}px, ${mousePos.y * 0.1}px) rotateX(${-mousePos.y * 0.1}deg) rotateY(${mousePos.x * 0.1}deg)`,
                 filter: `drop-shadow(${mousePos.x}px ${20 + mousePos.y}px 40px rgba(0,0,0,0.6))`
               }}
             />
