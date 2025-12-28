@@ -158,12 +158,12 @@ export const HeroSection = () => {
       </div>
 
       {/* Seamless artwork reveal - integrated into hero scroll */}
-      <div className="relative -mt-32 pb-20">
-        {/* Gradient fade from hero */}
-        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
+      <div className="relative -mt-32 pb-20 bg-wood-medium">
+        {/* Gradient fade from hero to wood-medium */}
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background to-wood-medium z-10 pointer-events-none" />
         
         {/* Artwork container */}
-        <div className="relative z-20 container mx-auto px-4">
+        <div className="relative z-20 container mx-auto px-4 pt-16">
           <div className="relative max-w-5xl mx-auto">
             {/* Ambient glow behind artwork */}
             <div className="absolute inset-0 blur-3xl opacity-30 bg-gradient-radial from-primary/40 via-primary/10 to-transparent" />

@@ -45,10 +45,7 @@ export const ArtistSection = () => {
   };
 
   return (
-    <section id="artist" className="relative py-24 md:py-32 bg-background">
-      {/* Top gradient for seamless blend */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent pointer-events-none" />
-      
+    <section id="artist" className="relative py-24 md:py-32 bg-wood-medium wood-texture">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Section header */}
         <ScrollReveal className="text-center mb-16">
