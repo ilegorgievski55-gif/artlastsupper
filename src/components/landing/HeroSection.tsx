@@ -11,6 +11,7 @@ interface MousePosition {
 export const HeroSection = () => {
   const [showContent, setShowContent] = useState(false);
   const [mousePos, setMousePos] = useState<MousePosition>({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const artworkRef = useRef<HTMLDivElement>(null);
 
@@ -181,20 +182,30 @@ export const HeroSection = () => {
       </div>
 
       {/* Seamless artwork reveal - integrated into hero scroll */}
-      <div className="relative -mt-32 pb-20 bg-wood-medium">
-        {/* Gradient fade from hero to wood-medium */}
-        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background to-wood-medium z-10 pointer-events-none" />
+      <div className="relative -mt-32 pb-20">
+        {/* Wood texture background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/artwork/wood-texture-bg.jpg)' }}
+        />
+        {/* Gradient fade from hero to background */}
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
         
         {/* Artwork container */}
-        <div ref={artworkRef} className="relative z-20 container mx-auto px-4 pt-16">
+        <div 
+          ref={artworkRef} 
+          className="relative z-20 container mx-auto px-4 pt-16"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <div className="relative max-w-5xl mx-auto">
-            {/* The artwork with reactive shadow and movement */}
+            {/* The artwork with reactive shadow, movement and hover zoom */}
             <img
               src="/images/artwork/last-supper-cutout.png"
               alt="The Last Supper - Hand-carved wooden relief by Stojmir Veselinov"
-              className="relative w-full h-auto transition-all duration-150 ease-out"
+              className="relative w-full h-auto transition-all duration-300 ease-out cursor-pointer"
               style={{
-                transform: `translate(${mousePos.x * 0.15}px, ${mousePos.y * 0.1}px) rotateX(${-mousePos.y * 0.1}deg) rotateY(${mousePos.x * 0.1}deg)`,
+                transform: `translate(${mousePos.x * 0.15}px, ${mousePos.y * 0.1}px) rotateX(${-mousePos.y * 0.1}deg) rotateY(${mousePos.x * 0.1}deg) scale(${isHovering ? 1.05 : 1})`,
                 filter: `drop-shadow(${mousePos.x}px ${20 + mousePos.y}px 40px rgba(0,0,0,0.6))`
               }}
             />
