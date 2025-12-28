@@ -4,32 +4,36 @@ import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 
 export const ArtistSection = () => {
-  // Placeholder artist photos - vintage B&W style
   const artistPhotos = [
     {
-      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+      src: '/images/artist/portrait.jpeg',
+      alt: 'Portrait of Stojmir Veselinov',
+      caption: 'Stojmir Veselinov — Master Wood Sculptor',
+    },
+    {
+      src: '/images/artist/workshop-1980.jpeg',
       alt: 'Stojmir Veselinov at work in his studio',
       caption: 'The master sculptor in his Štip workshop, circa 1980',
     },
     {
-      src: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=800&q=80',
+      src: '/images/artist/exhibition-1982.jpeg',
       alt: 'Exhibition opening',
       caption: 'Solo exhibition at Skopje National Gallery, 1982',
     },
     {
-      src: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?w=800&q=80',
+      src: '/images/artist/kumanovo-1985.jpeg',
       alt: 'Artist with sculpture',
       caption: 'Presenting award-winning piece at Kumanovo, 1985',
     },
     {
-      src: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&q=80',
-      alt: 'Workshop tools',
-      caption: 'Traditional hand tools passed through generations',
+      src: '/images/artist/with-artworks.jpeg',
+      alt: 'Stojmir Veselinov with his art pieces',
+      caption: 'The sculptor surrounded by his creations',
     },
     {
-      src: 'https://images.unsplash.com/photo-1558021212-51b6ecfa0db9?w=800&q=80',
-      alt: 'Crowd at exhibition',
-      caption: 'Visitors admiring works at group exhibition, Belgrade 1978',
+      src: '/images/artist/home-artworks.jpeg',
+      alt: 'Art pieces in his current home',
+      caption: 'His works preserved at home',
     },
   ];
 
