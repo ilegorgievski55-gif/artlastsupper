@@ -208,7 +208,7 @@ export const HeroSection = () => {
               className="relative w-full h-auto transition-all duration-300 ease-out cursor-pointer"
               style={{
                 transform: `translate(${mousePos.x * 0.15}px, ${mousePos.y * 0.1}px) rotateX(${-mousePos.y * 0.1}deg) rotateY(${mousePos.x * 0.1}deg) scale(${isHovering ? 1.05 : 1})`,
-                filter: `drop-shadow(${mousePos.x}px ${20 + mousePos.y}px 40px rgba(0,0,0,0.6))`
+                filter: `drop-shadow(${mousePos.x}px ${25 + mousePos.y}px 30px rgba(0,0,0,0.7)) drop-shadow(${mousePos.x * 0.5}px ${40 + mousePos.y}px 60px rgba(0,0,0,0.5))`
               }}
             />
             
