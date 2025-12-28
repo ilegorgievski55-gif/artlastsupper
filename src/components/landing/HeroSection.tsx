@@ -185,9 +185,11 @@ export const HeroSection = () => {
       <div className="relative -mt-32 pb-20">
         {/* Wood texture background image */}
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{ backgroundImage: 'url(/images/artwork/wood-texture-bg.jpg)' }}
         />
+        {/* Dark base behind the texture */}
+        <div className="absolute inset-0 bg-wood-medium -z-10" />
         {/* Gradient fade from hero to background */}
         <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
         
