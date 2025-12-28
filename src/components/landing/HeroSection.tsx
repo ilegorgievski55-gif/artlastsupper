@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, Hammer, Trees, Church, Award } from 'lucide-react';
 
 export const HeroSection = () => {
-  const [isRevealed, setIsRevealed] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Trigger reveal animation after component mounts
-    const timer = setTimeout(() => setIsRevealed(true), 500);
+    // Show content after 3 seconds of video playing
+    const timer = setTimeout(() => setShowContent(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -39,44 +40,44 @@ export const HeroSection = () => {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden wood-texture">
-      {/* Dramatic black-to-spotlight reveal effect */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Full-screen video background */}
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/videos/hero-video.mov" type="video/mp4" />
+      </video>
+
+      {/* Dark overlay that fades in with content */}
       <div 
         className={cn(
-          "absolute inset-0 bg-background transition-opacity duration-[3000ms]",
-          isRevealed ? "opacity-0" : "opacity-100"
+          "absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background transition-opacity duration-1000",
+          showContent ? "opacity-100" : "opacity-0"
         )}
-        style={{ zIndex: 5 }}
       />
-      
-      {/* Spotlight overlay */}
-      <div className="absolute inset-0 spotlight" />
-      
-      {/* Placeholder for hero image/video - dramatic sculpture reveal */}
+
+      {/* Wood texture overlay */}
       <div 
         className={cn(
-          "absolute inset-0 bg-cover bg-center transition-all duration-[3000ms]",
-          isRevealed ? "opacity-30 scale-100" : "opacity-0 scale-105"
+          "absolute inset-0 wood-texture transition-opacity duration-1000",
+          showContent ? "opacity-100" : "opacity-0"
         )}
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=1920&q=80')`,
-        }}
       />
 
-      {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-20 text-center max-w-5xl">
+      {/* Content - hidden for first 3 seconds */}
+      <div 
+        className={cn(
+          "relative z-10 container mx-auto px-4 py-20 text-center max-w-5xl transition-all duration-1000",
+          showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        )}
+      >
         {/* Main headline */}
-        <h1 
-          className={cn(
-            "font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-6",
-            "opacity-0 transition-all duration-1000",
-            isRevealed && "opacity-100 animate-fade-in"
-          )}
-          style={{ animationDelay: '1s' }}
-        >
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground mb-6">
           <span className="text-primary gold-glow">The Last Supper</span>
           <br />
           <span className="text-3xl sm:text-4xl md:text-5xl font-normal">
@@ -87,30 +88,22 @@ export const HeroSection = () => {
         </h1>
 
         {/* Subheadline */}
-        <p 
-          className={cn(
-            "font-body text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12",
-            "opacity-0",
-            isRevealed && "opacity-100 animate-fade-in"
-          )}
-          style={{ animationDelay: '1.5s' }}
-        >
+        <p className="font-body text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
           For discerning collectors who value rare, handcrafted legacy pieces. This one-of-a-kind relief was carved over years with profound love and devotion—never intended for sale, born from personal faith and Balkan heritage in his Štip workshop.
         </p>
 
         {/* Feature bullets */}
-        <div 
-          className={cn(
-            "grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 text-left",
-            "opacity-0",
-            isRevealed && "opacity-100 animate-fade-in"
-          )}
-          style={{ animationDelay: '2s' }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 text-left">
           {features.map((feature, index) => (
             <div 
               key={index} 
               className="flex items-start gap-4 p-4 rounded-sm bg-muted/30 backdrop-blur-sm border border-border/50"
+              style={{ 
+                transitionDelay: `${index * 150}ms`,
+                opacity: showContent ? 1 : 0,
+                transform: showContent ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 0.5s ease-out, transform 0.5s ease-out'
+              }}
             >
               <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
                 <feature.icon className="w-5 h-5 text-primary" />
@@ -124,12 +117,13 @@ export const HeroSection = () => {
 
         {/* CTA buttons */}
         <div 
-          className={cn(
-            "flex flex-col sm:flex-row gap-4 justify-center",
-            "opacity-0",
-            isRevealed && "opacity-100 animate-fade-in"
-          )}
-          style={{ animationDelay: '2.5s' }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+          style={{ 
+            transitionDelay: '600ms',
+            opacity: showContent ? 1 : 0,
+            transform: showContent ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.5s ease-out, transform 0.5s ease-out'
+          }}
         >
           <Button
             onClick={() => scrollToSection('contact')}
@@ -150,11 +144,10 @@ export const HeroSection = () => {
       {/* Scroll indicator */}
       <div 
         className={cn(
-          "absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground animate-float",
-          "opacity-0",
-          isRevealed && "opacity-100"
+          "absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground animate-float transition-opacity duration-500",
+          showContent ? "opacity-100" : "opacity-0"
         )}
-        style={{ animationDelay: '3s' }}
+        style={{ transitionDelay: '800ms' }}
       >
         <ChevronDown className="w-8 h-8" />
       </div>
