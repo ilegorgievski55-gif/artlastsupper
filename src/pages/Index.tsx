@@ -1,5 +1,4 @@
 import HeroSection from '@/components/landing/HeroSection';
-import FloatingArtwork from '@/components/landing/FloatingArtwork';
 import ArtistSection from '@/components/landing/ArtistSection';
 import OtherWorksSection from '@/components/landing/OtherWorksSection';
 import LastSupperSection from '@/components/landing/LastSupperSection';
@@ -11,7 +10,6 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-background">
       <HeroSection />
-      <FloatingArtwork />
       <ArtistSection />
       <OtherWorksSection />
       <LastSupperSection />
