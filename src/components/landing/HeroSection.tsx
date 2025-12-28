@@ -46,8 +46,10 @@ export const HeroSection = () => {
         ref={videoRef}
         autoPlay
         muted
-        loop
         playsInline
+        onEnded={(e) => {
+          e.currentTarget.pause();
+        }}
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src="/videos/hero-video.mov" type="video/mp4" />
